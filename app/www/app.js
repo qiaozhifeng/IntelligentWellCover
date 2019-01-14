@@ -1,9 +1,6 @@
-/**
- * Created by 崔启蒙 on 2018/4/14.
- */
-angular.module('app', ['ionic', 'ui.router','ngTouch', 'app.service', 'ngCordova', 'toggle-switch'])
-    .run(function($rootScope, $ionicPlatform, $state, $ionicHistory, config,
-                  $ionicPopup, $cordovaKeyboard, $timeout, $cordovaToast, $location){
+angular.module('app', ['ionic', 'ui.router', 'ngTouch', 'app.service', 'ngCordova', 'toggle-switch'])
+    .run(function ($rootScope, $ionicPlatform, $state, $ionicHistory, config,
+                   $ionicPopup, $cordovaKeyboard, $timeout, $cordovaToast, $location) {
 
         $state.go('app.login', {first: 1});
 
@@ -30,7 +27,7 @@ angular.module('app', ['ionic', 'ui.router','ngTouch', 'app.service', 'ngCordova
                         $rootScope.backButtonPressedOnceToExit = false;
                     }, 2000);
                 }
-            }else {
+            } else {
                 if ($cordovaKeyboard.isVisible()) {
                     $cordovaKeyboard.close();
                 } else {
@@ -49,51 +46,51 @@ angular.module('app', ['ionic', 'ui.router','ngTouch', 'app.service', 'ngCordova
             return false;
         }, 101);
         var cache = window.localStorage.getItem("APP_CONFIG");
-        if(cache){
+        if (cache) {
             cache = JSON.parse(cache);
             angular.extend(config, cache);
         }
     })
-    .config(function($ionicConfigProvider){
+    .config(function ($ionicConfigProvider) {
         $ionicConfigProvider.scrolling.jsScrolling(false);
     })
     .controller('homeCtrl', ['$scope', "$rootScope", "$window", "$state", "UserService", "$location", "$ionicLoading", "Router", "$ionicHistory", "$interval",
-        function($scope, $rootScope, $window, $state, UserService, $location, $ionicLoading, Router, $ionicHistory, $interval){
-        $rootScope.app = {
-            firstLogin: true,
-            userKey: ""
-        };
-        $rootScope.intervalObj = null;
-        $rootScope.Page = {};
-        $rootScope.GOBACK = function(){
-            // $ionicHistory.goBack()
-            window.history.back()
-        };
-        $rootScope.$watch(function(){
-            return $rootScope.loadingTracker?$rootScope.loadingTracker.active():false
-        }, function(nv, ov){
-            if(nv === true){
-                $ionicLoading.show({
-                    template: 'Loading...'
-                });
-            }else{
-                $ionicLoading.hide();
-            }
-        })
+        function ($scope, $rootScope, $window, $state, UserService, $location, $ionicLoading, Router, $ionicHistory, $interval) {
+            $rootScope.app = {
+                firstLogin: true,
+                userKey: ""
+            };
+            $rootScope.intervalObj = null;
+            $rootScope.Page = {};
+            $rootScope.GOBACK = function () {
+                // $ionicHistory.goBack()
+                window.history.back()
+            };
+            $rootScope.$watch(function () {
+                return $rootScope.loadingTracker ? $rootScope.loadingTracker.active() : false
+            }, function (nv, ov) {
+                if (nv === true) {
+                    $ionicLoading.show({
+                        template: 'Loading...'
+                    });
+                } else {
+                    $ionicLoading.hide();
+                }
+            })
 
-        $rootScope.$on("$stateChangeStart", function(event, toState, toParam, fromState, fromParam){
-            console.log($location.path());
-            toParam.fromState = fromState.name;
-            if(toState.name!='app.login' && !UserService.GetUser()){//todo 过期
-                event.preventDefault();
-                $state.go('app.login')
-            }else{
-                toState.name=='app.main'||
-                ($rootScope.Page = Router[toState.name])
-            }
-        })
-        $rootScope.$on("$stateChangeSuccess", function(event, toState, toParam, fromState, fromParam){
+            $rootScope.$on("$stateChangeStart", function (event, toState, toParam, fromState, fromParam) {
+                console.log($location.path());
+                toParam.fromState = fromState.name;
+                if (toState.name != 'app.login' && !UserService.GetUser()) {//todo 过期
+                    event.preventDefault();
+                    $state.go('app.login')
+                } else {
+                    toState.name == 'app.main' ||
+                    ($rootScope.Page = Router[toState.name])
+                }
+            })
+            $rootScope.$on("$stateChangeSuccess", function (event, toState, toParam, fromState, fromParam) {
 
 
-        })
-    }]);
+            })
+        }])

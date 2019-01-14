@@ -84,21 +84,21 @@ angular.module("app")
             OperateType: 2,
             Operate: false,
             Type: 1,
-            Show: true,
+            Show: false,
             defaultValue: 0
         },
         湿度: {
             OperateType: 2,
             Operate: false,
             Type: 1,
-            Show: true,
+            Show: false,
             defaultValue: 0
         },
         可燃气体浓度: {
             OperateType: 2,
             Operate: false,
             Type: 1,
-            Show: true,
+            Show: false,
             defaultValue: 0
         },
         急停已触发: {
@@ -311,7 +311,9 @@ angular.module("app")
         //     })
     }
     function createMarker(device, mapObj, isAlarm){
-        var iconImage = device.NewAlarmCount?"img/jg-alarm.png":"img/jg-normal.png";
+        var iconImage =  device.isLine?"img/jg-normal.png":"img/jg-offline.png";
+        if(device.NewAlarmCount)
+            iconImage = "img/jg-alarm.png";
         device.marker = new AMap.Marker({
             position: device.position,//marker所在的位置
             map: mapObj, //创建时直接赋予map属性

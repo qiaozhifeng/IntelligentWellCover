@@ -78,7 +78,8 @@
             <div class="action-list">
                 <div ng-repeat="sensorConifg in ActionList" ng-show="::sensorConifg.Show && !sensorConifg.Special">
                     <!--<img ng-src="{{::sensorConifg.sensor.iocUrl|ImgUrlFixed}}"/>-->
-                    <i ng-disabled="!Device.isLine" class="iconfont {{::sensorConifg.icon || 'icon-cry'}}" ng-class="{'sensor-on': sensorConifg.sensor.switcher == '1'}" ng-click="SensorSwitch(sensorConifg)"></i>
+                    <i class="iconfont {{::sensorConifg.icon || 'icon-cry'}}" ng-disabled="!Device.isLine" ng-show="sensorConifg.sensor.sensorName!='系统复位'"  ng-class="{'sensor-on': sensorConifg.sensor.switcher == '1'&&Device.isLine}" ng-click="SensorSwitch(sensorConifg)"></i>
+                    <i class="iconfont {{::sensorConifg.icon || 'icon-cry'}}" ng-disabled="!Device.isLine" ng-show="sensorConifg.sensor.sensorName=='系统复位'"   ng-class="{true:'sensor-on',false:'sensor-off'}[resetMouseDown]" ng-click="SensorSwitch(sensorConifg);"></i>
                     <div class="iconfont-bottom-text" ng-bind="::sensorConifg.sensor.sensorName"></div>
                 </div>
             </div>

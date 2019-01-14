@@ -8,6 +8,7 @@ angular.module('app')
         // $rootScope.Page.$Title = $state.params.deviceName;
         $scope.OperateIds = {};
         $scope.ControlCode = '';
+        $scope.resetMouseDown=false;
         $scope.VisibleMeter = config.VisibleMeter;
         $scope.DateAfter = Math.round((new Date() - DeviceService.GetLastDate())/1000);
         var intervalObj = $interval(function(){
@@ -161,7 +162,7 @@ angular.module('app')
             if(sensorConifg.OperateType == 3){
                 value = '1';
             }
-
+            $scope.resetMouseDown=true;
             DeviceService.ControlSwitchValue($scope.Device.deviceNo, sensor.sensorId, value, true)
                 .then(function(){
                     if(sensorConifg.OperateType == 3){
@@ -170,6 +171,7 @@ angular.module('app')
                     }else{
                         sensor.switcher = value;
                     }
+                    $scope.resetMouseDown=false;
                 })
         };
         $scope.SensorSwitchToggle = function(sensorConifg){

@@ -409,6 +409,9 @@ a{
 .sensor-on{
     color: greenyellow;
 }
+.sensor-off{
+    color: white;
+}
 .icon-kaiguankai{
     color: greenyellow;
 }
@@ -556,4 +559,8 @@ a{
     margin-left: 10px;
     width: 80px;
     display: inline;
+}
+
+i[disabled="disabled"] {
+    pointer-events: none;//阻止JavaScript点击动作触发的事件
 }
