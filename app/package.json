@@ -12,8 +12,8 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.15",
     "com.telerik.plugins.nativepagetransitions": "^0.6.5",
-    "cordova-android": "^7.0.0",
-    "cordova-browser": "^5.0.3",
+    "cordova-android": "^7.1.4",
+    "cordova-browser": "^5.0.4",
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-badge": "^0.8.7",
@@ -34,7 +34,8 @@
     "cordova-plugin-x-toast": "git+https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
     "ionic-native-transitions": "^1.0.3",
     "ionic-plugin-keyboard": "^2.2.1",
-    "jpush-phonegap-plugin": "^3.4.2"
+    "jpush-phonegap-plugin": "^3.4.2",
+    "vconsole": "^3.2.0"
   },
   "cordova": {
     "plugins": {
@@ -60,8 +61,8 @@
       "cordova-plugin-vibration": {}
     },
     "platforms": [
-      "browser",
-      "android"
+      "android",
+      "browser"
     ]
   }
 }
